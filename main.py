@@ -3,7 +3,7 @@ import os
 import textwrap
 
 dirty_words = ("penis", "vagina", "pussy", "cock", "bastard", "fuck", "cunt", "dick")
-inventory = ["Lint", "About £3.50 in loose change", "A floppy disk containing Leisure Suit Larry pt. 4"]
+inventory = []
 
 
 def open_inventory():
@@ -37,11 +37,50 @@ def play_again():
         sys.exit()
 
 
+def reset_inventory():
+    global inventory
+    inventory.clear()
+    inventory = ["Lint", "About £3.50 in loose change", "A floppy disk containing Leisure Suit Larry pt. 4"]
+
+
 def game_over(reason):
     # Print the reason supplied
     print(reason)
     print("\nGame Over!")
     play_again()
+
+
+def sword_room():
+    # Prompt time
+    print(textwrap.fill("\nThe room is dark apart from a beam on light falling from a hole in the ceiling. The light "
+                        "shines brightly and bathed in the glow, is a glorious looking sword. To say it's probably "
+                        "been sat here for years, it shows no signs of tarnish; the handle cast from Gold and the "
+                        "sword shining brightly, cut from the smoothest steel available. This would be a fine weapon "
+                        "for anyone. Once again, a door is visible on the back wall.",
+                        width=70, replace_whitespace=False))
+    print("\nWhat do you do? (1 or 2)")
+    print("1) Take the sword and forge onwards")
+    print("2) Ignore the sword and carry on to the next room")
+
+    while True:
+        answer = input("> ")
+        if answer == "1":
+            inventory.append("A bright, glorious sword")
+            print(textwrap.fill("\nYou grasp the handle of the sword and pull. It comes out with ease, the metal "
+                                "glistens in the light. You feel stronger, faster, you swear your manhood size has "
+                                "grown as well. You power on to the next room with glorious purpose.",
+                                width=70, replace_whitespace=False))
+            play_again()
+        elif answer == "2":
+            print(textwrap.fill("\nYou stare longingly at the sword but decide you better leave it where it is. You've "
+                                "gotten this far by leaving well enough alone. You carry on to the next room.",
+                                width=70, replace_whitespace=False))
+            play_again()
+        elif answer == "0":
+            open_inventory()
+        else:
+            game_over(textwrap.fill("\nLook, it's really simple. Just enter an actual command that I understand. Don't "
+                                    "push me okay?", width=70, replace_whitespace=False))
 
 
 def diamond_room():
@@ -75,8 +114,7 @@ def diamond_room():
                                 "of a life time. You tell yourself that you've just saved your own life and that some "
                                 "dreary demise would have afflicted you, had you taken any of the diamonds.",
                                 width=70, replace_whitespace=False))
-            # Give player a chance to play again
-            play_again()
+            sword_room()
         elif answer == "0":
             open_inventory()
         else:
@@ -153,6 +191,8 @@ def bear_room():
 def start():
     # Clear the screen
     clear_console()
+
+    reset_inventory()
 
     # Start the game by prompting the player to take a path
     print("You are standing in a dark room.")
