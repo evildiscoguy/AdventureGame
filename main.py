@@ -215,7 +215,7 @@ def bear_room():
                         width=70, replace_whitespace=False))
     print("\nWhat would you like to do? (1 or 2)")
     print("\n1) Try to take what the bear is eating")
-    print("2) Taunt the bear")
+    print("2) Try to scare the bear away")
 
     while True:
         # Take player input
