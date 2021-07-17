@@ -50,6 +50,57 @@ def game_over(reason):
     play_again()
 
 
+def room_of_certain_demise():
+    print(textwrap.fill("\nYou enter the room and immediately boss music starts playing. A 10-foot tall Knight in full "
+                        "black armour stands in front of you. The Knight draws it's sword and points it towards you. "
+                        "The Knight bellows out \"You have entered my domain, I have the right to defend myself. "
+                        "Prepare to die!\" Sweat pours down your face as the Knight approaches.",
+                        width=70, replace_whitespace=False))
+    print("\nWhat do you do? (1 or 2)")
+
+    if "A bright, glorious sword" in inventory:
+        print("\n1) Draw your sword and charge the Knight")
+    else:
+        print("\n1) Put your fists up and get ready to beat someone the heck up")
+    print("2) Reason with the Knight, no one has to die here")
+
+    while True:
+        answer = input("> ")
+        if answer == "1" and "A bright, glorious sword" in inventory:
+            game_over(textwrap.fill("\nAn epic fight ensures. The music intensifies. The Knight is a formidable "
+                                    "opponent but you're no slouch yourself. Finally you gain the upper hand and "
+                                    "with a powerful sling of your sword, you slice the Knight's head off. You "
+                                    "fall to the ground, exhausted but proud of your abilities. Suddenly you hear "
+                                    "sirens and a unseen door to the room bursts open. In walks four to five police "
+                                    "officers with guns. Turns out the Knight's wife was in the other room, saw it all "
+                                    "and called the police. You pick yourself up, sword still in hand. You raise the "
+                                    "sword, ready to fight your way out but then all the officers open fire. Turns out "
+                                    "swords don't do well against guns. You're dead.",
+                                    width=70, replace_whitespace=False))
+        elif answer == "1":
+            game_over(textwrap.fill("\nFists don't work well against swords it turns out. Your head flies off your "
+                                    "neck with relative ease as the Knight swings his sword with gusto. You're dead.",
+                                    width=70, replace_whitespace=False))
+        elif answer == "2" and "A bright, glorious sword" in inventory:
+            game_over(textwrap.fill("\nThe Knight listens to your plea and realises this is all pointless. The Knight "
+                                    "explains he has a wife and kid and doesn't want to fight. As you both go to "
+                                    "shake hands, he notices the sword you took earlier. Turns out that's HIS "
+                                    "sword and he's not happy you took it. He grabs you, takes the sword and thrusts "
+                                    "it into your stomach. You're dead.", width=70, replace_whitespace=False))
+        elif answer == "2":
+            print(textwrap.fill("\nThe Knight listens to your plea and realises this is all pointless. The Knight "
+                                "explains he has a wife and kid and doesn't want to fight. He asks his wife to "
+                                "prepare a meal and bring in some drinks. You have a fantastic night and make a new "
+                                "friend. You leave and go back home, not richer in treasure but richer in heart.",
+                                width=70, replace_whitespace=False))
+            play_again()
+        elif answer == "0":
+            open_inventory()
+        else:
+            game_over(textwrap.fill("\nThe Knight slices your head off. Maybe had you entered a correction response, "
+                                    "that wouldn't have happened.", width=70, replace_whitespace=False))
+
+
 def sword_room():
     # Prompt time
     print(textwrap.fill("\nThe room is dark apart from a beam on light falling from a hole in the ceiling. The light "
@@ -59,7 +110,7 @@ def sword_room():
                         "for anyone. Once again, a door is visible on the back wall.",
                         width=70, replace_whitespace=False))
     print("\nWhat do you do? (1 or 2)")
-    print("1) Take the sword and forge onwards")
+    print("\n1) Take the sword and forge onwards")
     print("2) Ignore the sword and carry on to the next room")
 
     while True:
@@ -70,12 +121,12 @@ def sword_room():
                                 "glistens in the light. You feel stronger, faster, you swear your manhood size has "
                                 "grown as well. You power on to the next room with glorious purpose.",
                                 width=70, replace_whitespace=False))
-            play_again()
+            room_of_certain_demise()
         elif answer == "2":
             print(textwrap.fill("\nYou stare longingly at the sword but decide you better leave it where it is. You've "
                                 "gotten this far by leaving well enough alone. You carry on to the next room.",
                                 width=70, replace_whitespace=False))
-            play_again()
+            room_of_certain_demise()
         elif answer == "0":
             open_inventory()
         else:
